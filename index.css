@@ -34,6 +34,7 @@
 .disclaimer {
     display: flex;
     align-items: flex-end;
+    font-size: 5px;
 }
 
 /*Givs a font size to the image domain*/
@@ -49,5 +50,6 @@ body {
 }
 
 a:hover {
-    
+    color: red;
+    font-size: 25px;
 }
