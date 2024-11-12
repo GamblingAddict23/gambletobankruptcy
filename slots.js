@@ -66,8 +66,7 @@ function seven() {
   checkSpin()
 }
 
-// seven()
-spin()
+
 function clickSpin(){
 
 let repeatInterval = setInterval(spin, 50) // happens every 100ms (0.1s)
