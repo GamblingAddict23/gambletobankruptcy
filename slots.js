@@ -38,35 +38,6 @@ function spin() {
   document.getElementById("yay").play()
 }
 
-
-function seven() {
-  
-  valueOne = 7
-  valueTwo = 7
-  valueThree = 7
-  slotValueOne.innerText = valueOne
-  slotValueTwo.innerText = valueTwo
-  slotValueThree.innerText = valueThree
-  if (valueOne == 7) {
-    spinnerOneEl.classList.add("seven")
-  } else {
-    spinnerOneEl.classList.remove("seven")
-  }
-  if (valueTwo == 7) {
-    spinnerTwoEl.classList.add("seven")
-  } else {
-    spinnerTwoEl.classList.remove("seven")
-  }
-  if (valueThree == 7) {
-    spinnerThreeEl.classList.add("seven")
-  } else {
-    spinnerThreeEl.classList.remove("seven")
-  }
-
-  checkSpin()
-}
-
-
 function clickSpin(){
 
 let repeatInterval = setInterval(spin, 50) // happens every 100ms (0.1s)
