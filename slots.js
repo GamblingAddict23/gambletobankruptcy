@@ -38,8 +38,7 @@ function spin() {
 
 
   document.getElementById("yay").play()
-  setTimeout(3700)
-  slotButton.hidden = false
+
 }
 
 function clickSpin() {
