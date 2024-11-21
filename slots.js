@@ -10,6 +10,8 @@ slotValueThree.innerText = valueThree
 
 
 function spin() {
+  slotButton.hidden = true
+
   valueOne = Math.floor(Math.random() * 10)
   valueTwo = Math.floor(Math.random() * 10)
   valueThree = Math.floor(Math.random() * 10)
@@ -32,23 +34,25 @@ function spin() {
     spinnerThreeEl.classList.remove("seven")
   }
 
-  
 
-  
+
+
   document.getElementById("yay").play()
+  setTimeout(3700)
+  slotButton.hidden = false
 }
 
-function clickSpin(){
+function clickSpin() {
 
-let repeatInterval = setInterval(spin, 50) // happens every 100ms (0.1s)
-setTimeout(function(){
-  clearInterval(repeatInterval) // stops repeatThis
-  checkSpin() // runs at the end
-},3700) // will happen after 2000ms (2s)
+  let repeatInterval = setInterval(spin, 50) // happens every 100ms (0.1s)
+  setTimeout(function () {
+    clearInterval(repeatInterval) // stops repeatThis
+    checkSpin() // runs at the end
+  }, 3700) // will happen after 2000ms (2s)
 
 }
 
-function checkSpin(){
+function checkSpin() {
   if (valueOne == 7 && valueTwo == 7 && valueThree == 7) {
     slotButton.hidden = true
   }
