@@ -34,9 +34,6 @@ function spin() {
     spinnerThreeEl.classList.remove("seven")
   }
 
-
-
-
   document.getElementById("yay").play()
 
 }
@@ -47,6 +44,7 @@ function clickSpin() {
   setTimeout(function () {
     clearInterval(repeatInterval) // stops repeatThis
     checkSpin() // runs at the end
+    slotButton.hidden = false
   }, 3700) // will happen after 2000ms (2s)
 
 }
