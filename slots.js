@@ -4,10 +4,6 @@ let spinnerThreeEl = document.getElementById("slotValueThree")
 let valueOne = 0
 let valueTwo = 0
 let valueThree = 0
-slotValueOne.innerText = valueOne
-slotValueTwo.innerText = valueTwo
-slotValueThree.innerText = valueThree
-
 
 function spin() {
   slotButton.hidden = true
@@ -38,19 +34,31 @@ function spin() {
 
 }
 
+function seven() {
+  valueOne = 7
+  valueTwo = 7
+  valueThree = 7
+  checkSpin()
+}
+
 function clickSpin() {
 
-  let repeatInterval = setInterval(spin, 50) // happens every 100ms (0.1s)
+  let repeatInterval = setInterval(spin, 50) // happens every 50ms (0.05s)
   setTimeout(function () {
     clearInterval(repeatInterval) // stops repeatThis
-    checkSpin() // runs at the end
     slotButton.hidden = false
-  }, 3700) // will happen after 2000ms (2s)
+    checkSpin() // runs at the end
+  }, 3700) // will happen after 3700ms (3.7s)
 
 }
 
 function checkSpin() {
   if (valueOne == 7 && valueTwo == 7 && valueThree == 7) {
     slotButton.hidden = true
+    window.location.href = "https://www.mn584.github.io/gambletobankruptcy/winscreen.html"
   }
 }
+
+
+//max's code from here
+
