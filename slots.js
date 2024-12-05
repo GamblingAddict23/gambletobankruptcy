@@ -6,7 +6,8 @@ let spinnerThreeEl = document.getElementById("slotValueThree")
 let valueOne = 0
 let valueTwo = 0
 let valueThree = 0
-//make slot button
+//make slot button variable
+let slotButton = document.getElementById("slotButton")
 
 //Miles' Code
 slotButton.hidden = true
@@ -46,16 +47,6 @@ function spin() {
   //plays the spinning audio
   document.getElementById("yay").play()
 
-}
-
-function seven() {
-  valueOne = 7
-  valueTwo = 7
-  valueThree = 7
-  slotValueOne.innerText = valueOne
-  slotValueTwo.innerText = valueTwo
-  slotValueThree.innerText = valueThree
-  checkSpin()
 }
 
 //this is run when the spin button is clicked
