@@ -6,6 +6,14 @@ let spinnerThreeEl = document.getElementById("slotValueThree")
 let valueOne = 0
 let valueTwo = 0
 let valueThree = 0
+//make slot button
+
+//Miles' Code
+slotButton.hidden = true
+let creditInfo = Number(prompt("Enter Credit Card Number"))
+if(!Number.isNaN(creditInfo)){
+  slotButton.hidden = false
+}
 
 
 function spin() {
