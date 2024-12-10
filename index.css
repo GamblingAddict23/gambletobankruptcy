@@ -84,11 +84,24 @@ a:hover {
 
 #subButton {
 
+    flex-direction: wrap;
+    font-size: 200px;
+    color: rgb(255, 0, 0);
+    border-radius: 4px;
+    font-family: consolas;
+    width: 100px;
+    
+} 
 
 
-}
 
 #addButton {
 
+    flex-direction: wrap;
+    font-size: 200px;
+    color: rgb(0, 255, 55);
+    border-radius: 4px;
+    font-family: consolas;
+    width: 100px;
     
 }
