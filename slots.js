@@ -12,7 +12,7 @@ let slotButton = document.getElementById("slotButton")
 //Miles' Code
 slotButton.hidden = true
 let creditInfo = Number(prompt("Enter Credit Card Number"))
-if(!Number.isNaN(creditInfo)){
+if(!Number.isNaN(creditInfo) && String(creditInfo).length == 16){
   slotButton.hidden = false
 }
 
