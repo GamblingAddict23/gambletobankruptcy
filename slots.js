@@ -11,9 +11,13 @@ let slotButton = document.getElementById("slotButton")
 
 //Miles' Code
 slotButton.hidden = true
-let creditInfo = Number(prompt("Enter Credit Card Number"))
-if(!Number.isNaN(creditInfo) && String(creditInfo).length == 16){
+let creditInfo = prompt("Enter Credit Card Number")
+if(/^\d{16}$/.test(creditInfo)){
   slotButton.hidden = false
+} else {
+  slotValueOne.hidden = true
+  slotValueTwo.innerText = "Invalid Credit Card Number"
+  slotValueThree.hidden = true
 }
 
 
