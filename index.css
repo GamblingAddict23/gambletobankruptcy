@@ -1,11 +1,10 @@
 #slotButton {
-    flex-direction: wrap;
     font-size: 72px;
     text-shadow: 0px 0px 6px darkgoldenrod,
         0px 0px 35px;
     color: gold;
     border: none;
-    border-radius: 4x;
+    border-radius: 4px;
     padding: 10px;
     font-family: consolas;
     box-shadow: 0px 0px 50px red,
@@ -57,7 +56,6 @@ a:hover {
 }
 
 #declineButton {
-    flex-direction: wrap;
     font-size: 7px;
     color: rgb(255, 0, 0);
     border: none;
@@ -68,7 +66,6 @@ a:hover {
     height:3px;
 }
 #acceptButton {
-    flex-direction: wrap;
     font-size: 200px;
     color: rgb(72, 255, 0);
     border: none;
@@ -83,25 +80,30 @@ a:hover {
 }
 
 #subButton {
-
-    flex-direction: wrap;
     font-size: 200px;
     color: rgb(255, 0, 0);
     border-radius: 4px;
     font-family: consolas;
     width: 100px;
-    
 } 
 
 
 
 #addButton {
-
-    flex-direction: wrap;
     font-size: 200px;
     color: rgb(0, 255, 55);
     border-radius: 4px;
     font-family: consolas;
     width: 100px;
-    
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    font-size: 200px;
+    color:rgb(255, 0, 0)
+}
+
+#text {
+    font-size: 100px;
 }

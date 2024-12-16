@@ -7,7 +7,7 @@ window.location.href = "https://mn584.github.io/gambletobankruptcy/slots.html"
 }
 
 function accepted() {
-    window.location.href = "https://raidshadowlegends.com"
+    window.location.href = "https://thisdoesntexist.github.io"
 }
 function add() {
     money = money + 1000
