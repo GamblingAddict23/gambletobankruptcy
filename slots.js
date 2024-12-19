@@ -48,8 +48,6 @@ function spin() {
   } else {
     spinnerThreeEl.classList.remove("seven")
   }
-  //plays the spinning audio
-  document.getElementById("yay").play()
 
 }
 
