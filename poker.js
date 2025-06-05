@@ -1,57 +1,4 @@
-// Poker game logic
-let deck = [];
-let hand = [];
-let heldCards = [false, false, false, false, false];
-
-// Initialize deck
-function initializeDeck() {
-    const suits = ["♠", "♥", "♦", "♣"];
-    const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    deck = [];
-    for (let suit of suits) {
-      for (let rank of ranks) {
-        deck.push({ rank, suit });
-      }
-    }
-    shuffleDeck();
-    
-    // Shuffle deck
-    function shuffleDeck() {
-      for (let i = deck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
-      }
-    }
-    
-    // Draw initial hands for dealer and player
-    function drawHands() {
-      if (deck.length < 10) { // Ensure there are enough cards for both hands
-        alert("Not enough cards left in the deck!");
-        return;
-      }
-      playerHand = [];
-      dealerHand = [];
-      for (let i = 0; i < 5; i++) {
-        playerHand.push(deck.pop());
-        dealerHand.push(deck.pop());
-      }
-      displayHands();
-    }
-// Redraw player's cards
-function redrawPlayerHand() {
-  if (deck.length < 5 - heldCards.filter(Boolean).length) {
-    alert("Not enough cards left in the deck!");
-    return;
-  }
-  for (let i = 0; i < 5; i++) {
-    if (!heldCards[i]) {
-      playerHand[i] = deck.pop();
-    }
-  }
-  displayHands();
-}
-
-// Display both hands
+// Function to display both hands
 function displayHands() {
   const playerHandContainer = document.getElementById("playerHandContainer");
   const dealerHandContainer = document.getElementById("dealerHandContainer");
@@ -100,11 +47,4 @@ function convertRankToNumber(rank) {
     "A": "14"
   };
   return rankMap[rank] || rank;
-}
-
-// Toggle hold status for player's cards
-function toggleHold(index) {
-  heldCards[index] = !heldCards[index];
-  displayHands();
-}
 }
