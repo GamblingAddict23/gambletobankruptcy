@@ -6,9 +6,7 @@ let heldCards = [false, false, false, false, false];
 // Initialize deck
 function initializeDeck() {
   const suits = ["♠", "♥", "♦", "♣"];
-  const ranks = [
-    "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
-  ];
+  const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   deck = [];
   for (let suit of suits) {
     for (let rank of ranks) {
@@ -28,6 +26,10 @@ function shuffleDeck() {
 
 // Draw initial hand
 function drawHand() {
+  if (deck.length < 5) {
+    alert("Not enough cards left in the deck!");
+    return;
+  }
   hand = [];
   for (let i = 0; i < 5; i++) {
     hand.push(deck.pop());
@@ -37,6 +39,10 @@ function drawHand() {
 
 // Redraw cards
 function redrawHand() {
+  if (deck.length < 5 - heldCards.filter(Boolean).length) {
+    alert("Not enough cards left in the deck!");
+    return;
+  }
   for (let i = 0; i < 5; i++) {
     if (!heldCards[i]) {
       hand[i] = deck.pop();
@@ -48,6 +54,10 @@ function redrawHand() {
 // Display hand
 function displayHand() {
   const handContainer = document.getElementById("handContainer");
+  if (!handContainer) {
+    console.error("handContainer element not found!");
+    return;
+  }
   handContainer.innerHTML = "";
   hand.forEach((card, index) => {
     const cardEl = document.createElement("div");
@@ -67,6 +77,11 @@ function toggleHold(index) {
 
 // Evaluate hand with numeric rankings
 function evaluateHand() {
+  if (hand.length < 5) {
+    alert("You must draw a full hand before evaluating!");
+    return;
+  }
+
   const ranks = hand.map(card => card.rank);
   const rankCounts = {};
   ranks.forEach(rank => {
@@ -100,5 +115,15 @@ function startPokerGame() {
 }
 
 // Attach event listeners
-document.getElementById("drawButton").onclick = redrawHand;
-document.getElementById("evaluateButton").onclick = evaluateHand;
+document.addEventListener("DOMContentLoaded", () => {
+  const drawButton = document.getElementById("drawButton");
+  const evaluateButton = document.getElementById("evaluateButton");
+
+  if (!drawButton || !evaluateButton) {
+    console.error("Buttons not found in the DOM!");
+    return;
+  }
+
+  drawButton.onclick = redrawHand;
+  evaluateButton.onclick = evaluateHand;
+});
