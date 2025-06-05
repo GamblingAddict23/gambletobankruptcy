@@ -1,73 +1,163 @@
-//declares variables to get the slots from slots.html
-let spinnerOneEl = document.getElementById("slotValueOne")
-let spinnerTwoEl = document.getElementById("slotValueTwo")
-let spinnerThreeEl = document.getElementById("slotValueThree")
-//declares variables to get values for slot numbers
-let valueOne = 0
-let valueTwo = 0
-let valueThree = 0
-//make slot button variable
-let slotButton = document.getElementById("slotButton")
+let deck = [];
+let playerHand = [];
+let dealerHand = [];
+let heldCards = [false, false, false, false, false];
 
-//Miles' Code
-slotButton.hidden = true
-let creditInfo = prompt("Enter Credit Card Number")
-if(/^\d{16}$/.test(creditInfo)){
-  slotButton.hidden = false
-} else {
-  slotValueOne.hidden = true
-  slotValueTwo.innerText = "Invalid Credit Card Number"
-  slotValueThree.hidden = true
+// Initialize deck
+function initializeDeck() {
+  const suits = ["♠", "♥", "♦", "♣"];
+  const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  deck = [];
+  for (let suit of suits) {
+    for (let rank of ranks) {
+      deck.push({ rank, suit });
+    }
+  }
+  shuffleDeck();
 }
 
-
-function spin() {
-  slotButton.hidden = true //hides the spin button so it can't be hit repeatedly
-
-  //randomizes all three values
-  valueOne = Math.floor(Math.random() * 10)
-  valueTwo = Math.floor(Math.random() * 10)
-  valueThree = Math.floor(Math.random() * 10)
-  //changes the numbers on screen to the randomized values
-  slotValueOne.innerText = valueOne
-  slotValueTwo.innerText = valueTwo
-  slotValueThree.innerText = valueThree
-  //gives class "seven" if a seven is hit and removes the class if it is any other number
-  if (valueOne == 7) {
-    spinnerOneEl.classList.add("seven")
-  } else {
-    spinnerOneEl.classList.remove("seven")
-  }
-  if (valueTwo == 7) {
-    spinnerTwoEl.classList.add("seven")
-  } else {
-    spinnerTwoEl.classList.remove("seven")
-  }
-  if (valueThree == 7) {
-    spinnerThreeEl.classList.add("seven")
-  } else {
-    spinnerThreeEl.classList.remove("seven")
-  }
-
-}
-
-//this is run when the spin button is clicked
-function clickSpin() {
-
-  let repeatInterval = setInterval(spin, 50) //runs the spin function every 50ms (0.05s)
-  setTimeout(function () {
-    clearInterval(repeatInterval) //stops repeatThis
-    slotButton.hidden = false //makes spin button reappear
-    checkSpin() //runs checkSpin function
-  }, 3700) //runs these 3 lines after 3700ms (3.7s)
-
-}
-
-//runs when 777 is hit
-function checkSpin() {
-  if (valueOne == 7 && valueTwo == 7 && valueThree == 7) {
-    slotButton.hidden = true //hides button
-    window.location.href = "https://mn584.github.io/gambletobankruptcy/winscreen.html" //opens winscreen.html
+// Shuffle deck
+function shuffleDeck() {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
   }
 }
 
+// Draw initial hands for dealer and player
+function drawHands() {
+  if (deck.length < 10) { // Ensure there are enough cards for both hands
+    alert("Not enough cards left in the deck!");
+    return;
+  }
+  playerHand = [];
+  dealerHand = [];
+  for (let i = 0; i < 5; i++) {
+    playerHand.push(deck.pop());
+    dealerHand.push(deck.pop());
+  }
+  displayHands();
+}
+
+// Redraw player's cards
+function redrawPlayerHand() {
+  if (deck.length < 5 - heldCards.filter(Boolean).length) {
+    alert("Not enough cards left in the deck!");
+    return;
+  }
+  for (let i = 0; i < 5; i++) {
+    if (!heldCards[i]) {
+      playerHand[i] = deck.pop();
+    }
+  }
+  displayHands();
+}
+
+// Display both hands
+function displayHands() {
+  const playerHandContainer = document.getElementById("playerHandContainer");
+  const dealerHandContainer = document.getElementById("dealerHandContainer");
+
+  if (!playerHandContainer || !dealerHandContainer) {
+    console.error("Hand containers not found!");
+    return;
+  }
+
+  // Display player's hand
+  playerHandContainer.innerHTML = "";
+  playerHand.forEach((card, index) => {
+    const cardEl = document.createElement("div");
+    cardEl.className = "card";
+    cardEl.innerText = `${convertRankToNumber(card.rank)}${card.suit}`;
+    cardEl.onclick = () => toggleHold(index);
+    cardEl.style.border = heldCards[index] ? "2px solid green" : "1px solid black";
+    playerHandContainer.appendChild(cardEl);
+  });
+
+  // Display dealer's hand
+  dealerHandContainer.innerHTML = "";
+  dealerHand.forEach(card => {
+    const cardEl = document.createElement("div");
+    cardEl.className = "card";
+    cardEl.innerText = `${convertRankToNumber(card.rank)}${card.suit}`;
+    dealerHandContainer.appendChild(cardEl);
+  });
+}
+
+// Convert card rank to numeric value (1 through Ace)
+function convertRankToNumber(rank) {
+  const rankMap = {
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "10": "10",
+    "J": "11",
+    "Q": "12",
+    "K": "13",
+    "A": "14"
+  };
+  return rankMap[rank] || rank;
+}
+
+// Toggle hold status for player's cards
+function toggleHold(index) {
+  heldCards[index] = !heldCards[index];
+  displayHands();
+}
+
+// Evaluate player's hand
+function evaluateHand() {
+  if (playerHand.length < 5) {
+    alert("You must draw a full hand before evaluating!");
+    return;
+  }
+
+  const ranks = playerHand.map(card => card.rank);
+  const rankCounts = {};
+  ranks.forEach(rank => {
+    rankCounts[rank] = (rankCounts[rank] || 0) + 1;
+  });
+
+  const counts = Object.values(rankCounts);
+  let resultRank = 1; // Default to High Card (rank 1)
+  if (counts.includes(4)) {
+    resultRank = 8; // Four of a Kind
+  } else if (counts.includes(3) && counts.includes(2)) {
+    resultRank = 7; // Full House
+  } else if (counts.includes(3)) {
+    resultRank = 4; // Three of a Kind
+  } else if (counts.filter(count => count === 2).length === 2) {
+    resultRank = 3; // Two Pair
+  } else if (counts.includes(2)) {
+    resultRank = 2; // One Pair
+  }
+
+  alert(`Your hand rank: ${resultRank}`);
+}
+
+// Start game
+function startPokerGame() {
+  initializeDeck();
+  drawHands();
+}
+
+// Attach event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const drawButton = document.getElementById("drawButton");
+  const evaluateButton = document.getElementById("evaluateButton");
+
+  if (!drawButton || !evaluateButton) {
+    console.error("Buttons not found in the DOM!");
+    return;
+  }
+
+  drawButton.onclick = redrawPlayerHand;
+  evaluateButton.onclick = evaluateHand;
+
+  startPokerGame();
+});

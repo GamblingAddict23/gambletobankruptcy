@@ -25,11 +25,21 @@
       font-size: 16px;
       cursor: pointer;
     }
+    #playerHandContainer, #dealerHandContainer {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Poker Game</h1>
-  <div id="handContainer"></div>
+  <div id="dealerHandContainer">
+    <h2>Dealer's Hand</h2>
+  </div>
+  <div id="playerHandContainer">
+    <h2>Player's Hand</h2>
+  </div>
   <button id="drawButton">Redraw</button>
   <button id="evaluateButton">Evaluate Hand</button>
 
