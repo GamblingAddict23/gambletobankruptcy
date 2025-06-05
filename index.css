@@ -107,3 +107,79 @@ a:hover {
 #text {
     font-size: 100px;
 }
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #handContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .card {
+    width: 60px;
+    height: 90px;
+    border: 1px solid black;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .card.held {
+    border: 2px solid green;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Numeric rankings for poker hands */
+  .high-card {
+    color: #000;
+  }
+  
+  .one-pair {
+    color: #007bff;
+  }
+  
+  .two-pair {
+    color: #28a745;
+  }
+  
+  .three-of-a-kind {
+    color: #ffc107;
+  }
+  
+  .straight {
+    color: #17a2b8;
+  }
+  
+  .flush {
+    color: #6f42c1;
+  }
+  
+  .full-house {
+    color: #fd7e14;
+  }
+  
+  .four-of-a-kind {
+    color: #dc3545;
+  }
+  
+  .straight-flush {
+    color: #343a40;
+  }
+  
+  .royal-flush {
+    color: #f8f9fa;
+  }

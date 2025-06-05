@@ -65,7 +65,7 @@ function toggleHold(index) {
   displayHand();
 }
 
-// Evaluate hand
+// Evaluate hand with numeric rankings
 function evaluateHand() {
   const ranks = hand.map(card => card.rank);
   const rankCounts = {};
@@ -74,19 +74,23 @@ function evaluateHand() {
   });
 
   const counts = Object.values(rankCounts);
-  let result = "High Card";
+  let resultRank = 1; // Default to High Card (rank 1)
   if (counts.includes(4)) {
-    result = "Four of a Kind";
+    resultRank = 8; // Four of a Kind
   } else if (counts.includes(3) && counts.includes(2)) {
-    result = "Full House";
+    resultRank = 7; // Full House
   } else if (counts.includes(3)) {
-    result = "Three of a Kind";
+    resultRank = 4; // Three of a Kind
   } else if (counts.filter(count => count === 2).length === 2) {
-    result = "Two Pair";
+    resultRank = 3; // Two Pair
   } else if (counts.includes(2)) {
-    result = "One Pair";
+    resultRank = 2; // One Pair
   }
-  alert(`Your hand: ${result}`);
+
+  const resultElement = document.createElement("div");
+  resultElement.className = `rank-${resultRank}`;
+  resultElement.innerText = `Your hand rank: ${resultRank}`;
+  document.body.appendChild(resultElement);
 }
 
 // Start game
